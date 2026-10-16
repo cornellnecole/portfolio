@@ -1,13 +1,18 @@
 (function () {
   const galleries = {
-    'e-commerce website': {
-      title: 'E-Commerce Website',
-      folder: 'assets/work/e-commerce website/',
+    'secure-system': {
+      title: 'Secure System — E-Commerce Website',
+      folder: 'assets/work/secure-system/',
       count: 6
     },
-    'bo-ok': {
-      title: 'BO-OK Booking System',
-      folder: 'assets/work/bo-ok/',
+    'zapsph': {
+      title: 'ZapsPH — E-Commerce Website',
+      folder: 'assets/work/zapsph/',
+      count: 6
+    },
+    'itph': {
+      title: 'ITPH — Real Estate Property Website',
+      folder: 'assets/work/itph/',
       count: 6
     },
     'certificates': {
