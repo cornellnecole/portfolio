@@ -43,19 +43,26 @@
   let lastFocused = null;
 
   function probeImages(folder, count) {
-    const attempts = [];
-    for (let i = 1; i <= count; i++) {
-      attempts.push(folder + i + '.jpg');
-    }
-    return Promise.all(
-      attempts.map(src => new Promise(resolve => {
-        const img = new Image();
-        img.onload = () => resolve(src);
-        img.onerror = () => resolve(null);
-        img.src = src;
-      }))
-    ).then(results => results.filter(Boolean));
+  const exts = ['png', 'jpg', 'jpeg', 'webp'];
+  const attempts = [];
+  for (let i = 1; i <= count; i++) {
+    attempts.push(
+      new Promise(resolve => {
+        let k = 0;
+        const tryNext = () => {
+          if (k >= exts.length) return resolve(null);
+          const src = folder + i + '.' + exts[k++];
+          const img = new Image();
+          img.onload = () => resolve(src);
+          img.onerror = tryNext;
+          img.src = src;
+        };
+        tryNext();
+      })
+    );
   }
+  return Promise.all(attempts).then(results => results.filter(Boolean));
+}
 
   function render() {
     if (currentImages.length === 0) {
